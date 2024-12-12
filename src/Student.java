@@ -1,9 +1,9 @@
 public class Student {
-    public String firstName;
-    public String lastName;
-    public String uniLevel;
-    public int id;
-    public MyDate birthDate;
+    private String firstName;
+    private String lastName;
+    private String uniLevel;
+    private int id;
+    private MyDate birthDate;
 
 
     public Student(String birthDate) {

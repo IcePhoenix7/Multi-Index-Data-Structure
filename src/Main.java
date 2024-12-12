@@ -15,7 +15,7 @@ public class Main {
                 lastName = row[2];
                 firstName = row[1];
                 dateOfBirth = row[3];
-                uniLevel = row[4];
+                uniLevel = row[4].replace("\n","");
 
                 Student student = new Student(id,lastName,firstName,uniLevel,dateOfBirth);
                 students.add(student);
@@ -39,6 +39,11 @@ public class Main {
         System.out.println("############################");
         System.out.println("In-Order Traversal (Alphabetical Order) based on the ID:");
         avlTreeID.inorder();
+        UniLevels uniLevels = new UniLevels(students);
+        System.out.println("############################");
+        String level = "FR";
+        System.out.println("get the list of "+level+" students");
+        System.out.println(uniLevels.getList(level));
     }
 
 }
