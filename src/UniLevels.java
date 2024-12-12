@@ -1,19 +1,15 @@
 import java.util.ArrayList;
-
-
 public class UniLevels {
-    SLL<Student>[] levels = new SLL[]{new SLL<>(), new SLL<>(), new SLL<>(), new SLL<>()};
+    ArrayList<Student>[] levels = new ArrayList[]{new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>()};
     String[] labels = {"FR","SO","SR","JR"};//Todo: mapping
 
     UniLevels(ArrayList<Student> students){
         for(Student student: students){
             System.out.println(student.getUniLevel());
-            getList(student).addToHead(student);
+            getList(student).add(student);
         }
     }
-
-    public SLL<Student> getList(String level){
-        SLL<Student> l;
+    public ArrayList<Student> getList(String level){
         switch (level){
             case "FR" : return levels[0];
             case "SO" : return levels[1];
@@ -22,15 +18,13 @@ public class UniLevels {
             default: return null;
         }
     }
-    public SLL<Student> getList(Student student){
+    public ArrayList<Student> getList(Student student){
         return getList(student.getUniLevel());
     }
     public void delete(Student student){
-        getList(student).delete(student);
+        getList(student).remove(student);
     }
     public void insert(Student student){
-        getList(student).addToTail(student);
+        getList(student).add(student);
     }
-
-
 }
