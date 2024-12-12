@@ -64,7 +64,7 @@ public class AVLTree<T extends Comparable<? super T>> extends BST<T> {
             int balanceFactor = getBalanceFactor();
 
             if(balanceFactor == -2) {
-                System.out.println("Balancing node with el: "+root.el);
+                //System.out.println("Balancing node with el: "+root.el);
                 if(getLeftAVL().getBalanceFactor() < 0)
                     rotateRight();
                 else
@@ -72,7 +72,7 @@ public class AVLTree<T extends Comparable<? super T>> extends BST<T> {
             }
 
             else if(balanceFactor == 2) {
-                System.out.println("Balancing node with el: "+root.el);
+                //System.out.println("Balancing node with el: "+root.el);
                 if(getRightAVL().getBalanceFactor() > 0)
                     rotateLeft();
                 else
@@ -90,9 +90,6 @@ public class AVLTree<T extends Comparable<? super T>> extends BST<T> {
     }
 
     protected void rotateRight() {
-        System.out.println("RIGHT ROTATION");
-        //Q1
-
         BSTNode<T> tempNode = root.right;
         root.right = root.left;
         root.left = root.right.left;
@@ -109,7 +106,6 @@ public class AVLTree<T extends Comparable<? super T>> extends BST<T> {
 
 
     protected void rotateLeft() {
-        System.out.println("LEFT ROTATION");
         BSTNode<T> tempNode = root.left;
         root.left = root.right;
         root.right = root.left.right;
@@ -128,7 +124,7 @@ public class AVLTree<T extends Comparable<? super T>> extends BST<T> {
     {
 
         //Q1
-        System.out.println("Double Rotation...");
+        //Double Rotation...
         getLeftAVL().rotateLeft();
         getLeftAVL().adjustHeight();
         this.rotateRight();
@@ -137,7 +133,7 @@ public class AVLTree<T extends Comparable<? super T>> extends BST<T> {
 
     protected void rotateRightLeft()
     {
-        System.out.println("Double Rotation...");
+        //Double Rotation...
         getRightAVL().rotateRight();
         getRightAVL().adjustHeight();
         this.rotateLeft();

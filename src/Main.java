@@ -12,8 +12,8 @@ public class Main {
             while (input.hasNext()){
                 String[] row = input.nextLine().split(",");
                 id = Integer.parseInt(row[0]);
-                lastName = row[1];
-                firstName = row[2];
+                lastName = row[2];
+                firstName = row[1];
                 dateOfBirth = row[3];
                 uniLevel = row[4];
 
@@ -25,6 +25,20 @@ public class Main {
             System.out.println(e.getMessage());
         }
         System.out.println(students);
-
+        AVLTreeLastName avlTreeLastName = new AVLTreeLastName(students);
+        System.out.println("############################");
+        System.out.println("In-Order Traversal (Alphabetical Order) based on Last Name:");
+        avlTreeLastName.inorder();
+        System.out.println();
+        AVLTreeFirstName avlTreeFirstName = new AVLTreeFirstName(students);
+        System.out.println("############################");
+        System.out.println("In-Order Traversal (Alphabetical Order) based on First Name:");
+        avlTreeFirstName.inorder();
+        System.out.println();
+        AVLTreeID avlTreeID = new AVLTreeID(students);
+        System.out.println("############################");
+        System.out.println("In-Order Traversal (Alphabetical Order) based on the ID:");
+        avlTreeID.inorder();
     }
+
 }

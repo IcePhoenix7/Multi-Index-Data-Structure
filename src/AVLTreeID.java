@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
-public class AVLTreeFirstName extends AVLTree<String> {
+public class AVLTreeID extends AVLTree<Integer> {
 
-    public AVLTreeFirstName(ArrayList<Student> students) {
+    public AVLTreeID(ArrayList<Student> students) {
         for (Student student : students) {
-            this.insertAVL(student.getFirstName(), student);
+            this.insertAVL(student.getId(), student);
             //System.out.println(student.getLastName() + " Inserted into AVL Tree");
         }
     }
