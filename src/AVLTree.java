@@ -50,6 +50,8 @@ public class AVLTree<T extends Comparable<? super T>> extends BST<T> {
 
     public void deleteAVL(T el) {
         //Q1
+        super.deleteByCopying(el); // You can use deleteByCopying if preferred
+        this.balance();
     }
 
     protected void balance()
