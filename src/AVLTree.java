@@ -130,6 +130,7 @@ public class AVLTree<T extends Comparable<? super T>> extends BST<T> {
         adjustHeight();
     }
 
+    @Override
     public Student get(T el){
         return super.get(el);
     }

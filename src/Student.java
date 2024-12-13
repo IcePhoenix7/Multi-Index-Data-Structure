@@ -22,6 +22,13 @@ public class Student  {//Tode implements Comparable<Student> i had to delete idk
         this.uniLevel = uniLevel;
     }
 
+    public Student(int id, String firstName, String lastName, String uniLevel, MyDate birthDate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.uniLevel = uniLevel;
+        this.id = id;
+        this.birthDate = birthDate;
+    }
 
     public int getId(){
         return id;
@@ -47,6 +54,26 @@ public class Student  {//Tode implements Comparable<Student> i had to delete idk
     }
     public int getDay(){
         return birthDate.getDay();
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setUniLevel(String uniLevel) {
+        this.uniLevel = uniLevel;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setBirthDate(MyDate birthDate) {
+        this.birthDate = birthDate;
     }
 
     @Override

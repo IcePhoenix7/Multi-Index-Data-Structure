@@ -9,6 +9,21 @@ public class MultiIndexStudentManager {
     UniLevels uniLevels;
     ArrayList<Student> test;
 
+    public AVLTreeID getAvlTreeID() {
+        return avlTreeID;
+    }
+
+    public AVLTreeLastName getAvlTreeLastName() {
+        return avlTreeLastName;
+    }
+
+    public AVLTreeFirstName getAvlTreeFirstName() {
+        return avlTreeFirstName;
+    }
+
+    public UniLevels getUniLevels() {
+        return uniLevels;
+    }
 
     public MultiIndexStudentManager() {
         avlTreeID = new AVLTreeID();
