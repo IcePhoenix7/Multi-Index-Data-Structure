@@ -9,6 +9,10 @@ public class AVLTreeFirstName extends AVLTree<String> {
         }
     }
 
+    public AVLTreeFirstName() {
+
+    }
+
     @Override
     public void breadthPrint() {
         super.breadthPrint();

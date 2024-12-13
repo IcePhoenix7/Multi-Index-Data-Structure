@@ -44,8 +44,6 @@ public class ourSandbox {
         String level = "FR";
         System.out.println("get the list of "+level+" students");
         System.out.println(uniLevels.getList(level));
-
-
     }
 
 }

@@ -1,4 +1,4 @@
-public class Student {
+public class Student  {//Tode implements Comparable<Student> i had to delete idk why it was there
     private String firstName;
     private String lastName;
     private String uniLevel;
@@ -52,7 +52,7 @@ public class Student {
     @Override
     public String toString() {
         return id + " | " +
-                firstName + " | " +
+                firstName + "  " +
                 lastName + " | " +
                 birthDate + " | " +
                 uniLevel + "\n";

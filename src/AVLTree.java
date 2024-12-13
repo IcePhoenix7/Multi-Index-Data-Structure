@@ -54,6 +54,8 @@ public class AVLTree<T extends Comparable<? super T>> extends BST<T> {
         this.balance();
     }
 
+
+
     protected void balance()
     {
         if(!isEmpty())
@@ -99,9 +101,11 @@ public class AVLTree<T extends Comparable<? super T>> extends BST<T> {
         root.right.right = tempNode;
 
         T val = (T) root.el;
+        Student tempStd = root.studentInfo;
         root.el = root.right.el;
+        root.studentInfo = root.right.studentInfo;
         root.right.el = val;
-
+        root.right.studentInfo = tempStd;
         getRightAVL().adjustHeight();
         adjustHeight();
     }
@@ -109,17 +113,25 @@ public class AVLTree<T extends Comparable<? super T>> extends BST<T> {
 
     protected void rotateLeft() {
         BSTNode<T> tempNode = root.left;
+
         root.left = root.right;
         root.right = root.left.right;
         root.left.right = root.left.left;
         root.left.left = tempNode;
 
         T val = (T) root.el;
+        Student tempStd = root.studentInfo;
         root.el = root.left.el;
+        root.studentInfo = root.left.studentInfo;
         root.left.el = val;
+        root.left.studentInfo = tempStd;
 
         getLeftAVL().adjustHeight();
         adjustHeight();
+    }
+
+    public Student get(T el){
+        return super.get(el);
     }
 
     protected void rotateLeftRight()
@@ -140,6 +152,11 @@ public class AVLTree<T extends Comparable<? super T>> extends BST<T> {
         getRightAVL().adjustHeight();
         this.rotateLeft();
         this.adjustHeight();
+    }
+
+    @Override
+    public boolean isInTree(T el){
+        return super.isInTree(el);
     }
 
 
@@ -165,5 +182,5 @@ public class AVLTree<T extends Comparable<? super T>> extends BST<T> {
             }
         }
     }
-    }
+}
 

@@ -9,6 +9,10 @@ public class AVLTreeID extends AVLTree<Integer> {
         }
     }
 
+    public AVLTreeID() {
+
+    }
+
     @Override
     public void breadthPrint() {
         super.breadthPrint();

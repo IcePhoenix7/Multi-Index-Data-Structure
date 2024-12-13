@@ -9,6 +9,11 @@ public class UniLevels {
             getList(student).add(student);
         }
     }
+
+    public UniLevels() {
+
+    }
+
     public ArrayList<Student> getList(String level){
         switch (level){
             case "FR" : return levels[0];

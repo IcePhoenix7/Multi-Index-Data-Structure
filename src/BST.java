@@ -62,8 +62,24 @@ public class BST<T extends Comparable<? super T>> {
         int comparisonResult = el.compareTo(p.el);
         if(comparisonResult == 0){
             return true;
-            }
+        }
         return (comparisonResult > 0) ? search(el, p.right) : search(el, p.left);
+    }
+    public Student get(T el) {
+        return get(el, root);
+    }
+    protected Student get(T el, BSTNode<T> p) {
+        if( p == null){
+            return null;
+        }
+        int comparisonResult = el.compareTo(p.el);
+        if(comparisonResult == 0){
+
+            return p.studentInfo;
+
+        }
+
+        return (comparisonResult > 0) ? get(el, p.right) : get(el, p.left);
     }
 
     public void preorder() {
@@ -86,6 +102,7 @@ public class BST<T extends Comparable<? super T>> {
         if (p != null) {
             inorder(p.left);
             visit(p);
+            System.out.print(" " + p.studentInfo);
             inorder(p.right);
         }
     }
