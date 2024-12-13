@@ -63,12 +63,14 @@ public class StudentManagementUI {
             case 2:
                 // TODO: Implement search by Last Name✔
                 System.out.print("Enter Last Name: ");
-                String lastName = scanner.nextLine();
+                String lastName = scanner.nextLine().replace("\n","");
+                student = multiIndexStudentManager.getAvlTreeLastName().get(lastName);
                 break;
             case 3:
                 // TODO: Implement search by First Name✔
                 System.out.print("Enter First Name: ");
-                String firstName = scanner.nextLine();
+                String firstName = scanner.nextLine().replace("\n","");;
+                student = multiIndexStudentManager.getAvlTreeFirstName().get(firstName);
                 break;
             default:
                 System.out.println("Invalid choice. Returning to main menu.");
