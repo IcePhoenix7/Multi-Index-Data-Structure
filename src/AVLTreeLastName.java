@@ -17,4 +17,28 @@ public class AVLTreeLastName extends AVLTree<String> {
     public void breadthPrint() {
         super.breadthPrint();
     }
+    public ArrayList<Student> getbyName(String name){
+        ArrayList<Student> students = new ArrayList<>();
+        while(super.isInTree(name)){
+            Student currStudent = super.deleteAVL(name);
+            students.add(currStudent);
+        }
+        for(Student student : students){
+            this.insertAVL(student.getFirstName(), student);
+        }
+        return students;
+    }
+    public void delete(String name, int id){
+        ArrayList<Student> students = new ArrayList<>();
+        while(super.isInTree(name)){
+            Student currStudent = super.deleteAVL(name);
+            students.add(currStudent);
+        }
+        for(Student student : students){
+            if(student.getId() != id) {
+                this.insertAVL(student.getFirstName(), student);
+            }
+        }
+
+    }
 }

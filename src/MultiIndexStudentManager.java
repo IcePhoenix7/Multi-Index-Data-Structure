@@ -41,7 +41,9 @@ public class MultiIndexStudentManager {
         test.add(student);
     }
     public void delete(Student student){
-        //avlTreeID.delete;//add a delete method for avlTree based on the object
+        avlTreeFirstName.delete(student.getFirstName(), student.getId());
+        avlTreeLastName.delete(student.getLastName(), student.getId());
+        avlTreeID.deleteAVL(student.getId());//add a delete method for avlTree based on the object
         uniLevels.delete(student);
     }
     public void addRecordsFromCSV(String fileName){

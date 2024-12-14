@@ -17,4 +17,8 @@ public class AVLTreeID extends AVLTree<Integer> {
     public void breadthPrint() {
         super.breadthPrint();
     }
+    @Override
+    public Student deleteAVL(Integer id) {
+        return super.deleteAVL(id);
+    }
 }

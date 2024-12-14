@@ -48,10 +48,11 @@ public class AVLTree<T extends Comparable<? super T>> extends BST<T> {
         this.balance();
     }
 
-    public void deleteAVL(T el) {
+    public Student deleteAVL(T el) {
         //Q1
-        super.deleteByCopying(el); // You can use deleteByCopying if preferred
-        this.balance();
+        Student deletedStudent = super.deleteByCopying(el);
+        this.balance();// You can use deleteByCopying if preferred
+        return deletedStudent;
     }
 
 
@@ -184,4 +185,5 @@ public class AVLTree<T extends Comparable<? super T>> extends BST<T> {
         }
     }
 }
+
 

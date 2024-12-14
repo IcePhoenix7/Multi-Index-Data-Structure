@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class StudentManagementUI {
 
     private final MultiIndexStudentManager multiIndexStudentManager;
@@ -51,7 +52,9 @@ public class StudentManagementUI {
         int choice = getValidIntInput();
 
 
+
         Student student = null;
+        ArrayList<Student> students = null;
 
         switch (choice) {
             case 1:
@@ -63,28 +66,53 @@ public class StudentManagementUI {
             case 2:
                 // TODO: Implement search by Last Name✔
                 System.out.print("Enter Last Name: ");
-                String lastName = scanner.nextLine().replace("\n","");
-                student = multiIndexStudentManager.getAvlTreeLastName().get(lastName);
+                String lastName = scanner.nextLine();
+                students = multiIndexStudentManager.getAvlTreeLastName().getbyName(lastName);
                 break;
             case 3:
                 // TODO: Implement search by First Name✔
                 System.out.print("Enter First Name: ");
-                String firstName = scanner.nextLine().replace("\n","");;
-                student = multiIndexStudentManager.getAvlTreeFirstName().get(firstName);
+                String firstName = scanner.nextLine();
+                students = multiIndexStudentManager.getAvlTreeFirstName().getbyName(firstName);
                 break;
             default:
                 System.out.println("Invalid choice. Returning to main menu.");
                 return;
         }
         if(student != null){
-            System.out.println("\nStudent Found: "+student);
+            System.out.println("\nStudent Found: "+student.toString());
             System.out.println("1. Edit Student");
             System.out.println("2. Delete Student");
             System.out.println("3. Return to Main Menu");
             System.out.print("Enter your choice: ");
         }
+        if(students.size() != 0){
 
-
+            if(students.size() == 1){
+                student = students.get(0);
+                System.out.println("\nStudent Found: "+student.toString());
+                System.out.println("1. Edit Student");
+                System.out.println("2. Delete Student");
+                System.out.println("3. Return to Main Menu");
+                System.out.print("Enter your choice: ");
+            }
+            else {
+                int counter = 1;
+                System.out.println("\nStudents Found:");
+                for (Student s : students) {
+                    System.out.println(counter + " " + s.toString());
+                    counter++;
+                }
+                System.out.println("\nSelect student based on index: ");
+                int nestedChoice = getValidIntInput();
+                student = students.get(nestedChoice - 1);
+                System.out.println("Student Chosen: " + student.toString());
+                System.out.println("1. Edit Student");
+                System.out.println("2. Delete Student");
+                System.out.println("3. Return to Main Menu");
+                System.out.print("Enter your choice: ");
+            }
+        }
         int actionChoice = getValidIntInput();
         switch (actionChoice) {
             case 1:
@@ -95,6 +123,7 @@ public class StudentManagementUI {
                 // TODO: Implement delete student
                 // Todo: work on validation
                 multiIndexStudentManager.delete(student);
+                System.out.println("The Following Student has been Deleted: "+student.toString());
                 break;
             case 3:
                 return;
@@ -134,6 +163,10 @@ public class StudentManagementUI {
         ArrayList<Student> students = multiIndexStudentManager.getUniLevels().getList(level);
         System.out.print("Students in level " + level + ": \n"+ students);
     }
+
+
+
+
     private void editStudent(Student student) {
         while (true) {
             System.out.println("\nEdit Student:");

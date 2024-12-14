@@ -65,6 +65,25 @@ public class BST<T extends Comparable<? super T>> {
         }
         return (comparisonResult > 0) ? search(el, p.right) : search(el, p.left);
     }
+    public Student getbyID(int id) {
+        return getbyID(id, root);
+    }
+    protected Student getbyID(int id, BSTNode<T> p) {
+        if( p == null){
+            return null;
+        }
+        int comparisonResult = Integer.valueOf(id).compareTo(Integer.valueOf(p.studentInfo.getId()));
+        if(comparisonResult == 0){
+
+            return p.studentInfo;
+
+        }
+
+        return (comparisonResult > 0) ? getbyID(id, p.right) : getbyID(id, p.left);
+    }
+
+
+
     public Student get(T el) {
         return get(el, root);
     }
@@ -123,43 +142,102 @@ public class BST<T extends Comparable<? super T>> {
         }
     }
 
-    public void deleteByCopying(T el) {
+//    public void deleteByCopying(T el) {
+//        BSTNode<T> node, p = root, prev = null;
+//        while (p != null && !p.el.equals(el)) {  // find the node p
+//            prev = p;                           // with element el;
+//            if (el.compareTo(p.el) < 0)
+//                p = p.left;
+//            else p = p.right;
+//        }
+//        node = p;
+//        if (p != null && p.el.equals(el)) {
+//            if (node.right == null)             // node has no right child;
+//                node = node.left;
+//            else if (node.left == null)         // no left child for node;
+//                node = node.right;
+//            else {
+//                BSTNode<T> tmp = node.left;    // node has both children;
+//                BSTNode<T> previous = node;    // 1.
+//                while (tmp.right != null) {    // 2. find the rightmost
+//                    previous = tmp;            //    position in the
+//                    tmp = tmp.right;           //    left subtree of node;
+//                }
+//                node.el = tmp.el;              // 3. overwrite the reference
+//                //    to the element being deleted;
+//                if (previous == node)          // if node's left child's
+//                    previous.left  = tmp.left; // right subtree is null;
+//                else previous.right = tmp.left; // 4.
+//            }
+//            if (p == root)
+//                root = node;
+//            else if (prev.left == p)
+//                prev.left = node;
+//            else prev.right = node;
+//        }
+//        else if (root != null)
+//            System.out.println("el " + el + " is not in the tree");
+//        else System.out.println("the tree is empty");
+//    }
+
+    public Student deleteByCopying(T el) {
         BSTNode<T> node, p = root, prev = null;
-        while (p != null && !p.el.equals(el)) {  // find the node p
+        while (p != null && !p.el.equals(el)) { // find the node p
             prev = p;                           // with element el;
             if (el.compareTo(p.el) < 0)
                 p = p.left;
-            else p = p.right;
+            else
+                p = p.right;
         }
-        node = p;
-        if (p != null && p.el.equals(el)) {
-            if (node.right == null)             // node has no right child;
-                node = node.left;
-            else if (node.left == null)         // no left child for node;
-                node = node.right;
-            else {
-                BSTNode<T> tmp = node.left;    // node has both children;
-                BSTNode<T> previous = node;    // 1.
-                while (tmp.right != null) {    // 2. find the rightmost
-                    previous = tmp;            //    position in the
-                    tmp = tmp.right;           //    left subtree of node;
-                }
-                node.el = tmp.el;              // 3. overwrite the reference
-                //    to the element being deleted;
-                if (previous == node)          // if node's left child's
-                    previous.left  = tmp.left; // right subtree is null;
-                else previous.right = tmp.left; // 4.
-            }
-            if (p == root)
-                root = node;
-            else if (prev.left == p)
-                prev.left = node;
-            else prev.right = node;
-        }
-        else if (root != null)
+
+        if (p == null) {
             System.out.println("el " + el + " is not in the tree");
-        else System.out.println("the tree is empty");
+            return null;
+        }
+
+
+        Student deletedStudent = p.studentInfo;
+
+        node = p;
+
+        if (node.right == null) {               // node has no right child;
+            node = node.left;
+        } else if (node.left == null) {
+            node = node.right;
+        } else {
+
+            BSTNode<T> tmp = node.left;
+            BSTNode<T> previous = node;
+            while (tmp.right != null) {
+                previous = tmp;
+                tmp = tmp.right;
+            }
+
+            node.el = tmp.el;
+            node.studentInfo = tmp.studentInfo;
+
+            // Remove tmp
+            if (previous == node) {
+                previous.left = tmp.left;
+            } else {
+                previous.right = tmp.left; // 4.
+            }
+        }
+
+
+        if (p == root) {
+            root = node;
+        } else if (prev.left == p) {
+            prev.left = node;
+        } else {
+            prev.right = node;
+        }
+
+
+        return deletedStudent;
     }
+
+
 
     public void deleteByMerging(T el) {
         BSTNode<T> tmp, node, p = root, prev = null;
