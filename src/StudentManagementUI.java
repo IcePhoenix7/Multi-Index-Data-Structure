@@ -51,68 +51,11 @@ public class StudentManagementUI {
 
         int choice = getValidIntInput();
 
-
-
         Student student = null;
-        ArrayList<Student> students = null;
+        while(student == null) {
+            student = getStudentMenu(choice);
+        }
 
-        switch (choice) {
-            case 1:
-                // TODO: Implement search by ID ✔
-                System.out.print("Enter ID: ");
-                int id = getValidIntInput();
-                student = multiIndexStudentManager.getAvlTreeID().get(id);
-                break;
-            case 2:
-                // TODO: Implement search by Last Name✔
-                System.out.print("Enter Last Name: ");
-                String lastName = scanner.nextLine();
-                students = multiIndexStudentManager.getAvlTreeLastName().getbyName(lastName);
-                break;
-            case 3:
-                // TODO: Implement search by First Name✔
-                System.out.print("Enter First Name: ");
-                String firstName = scanner.nextLine();
-                students = multiIndexStudentManager.getAvlTreeFirstName().getbyName(firstName);
-                break;
-            default:
-                System.out.println("Invalid choice. Returning to main menu.");
-                return;
-        }
-        if(student != null){
-            System.out.println("\nStudent Found: "+student.toString());
-            System.out.println("1. Edit Student");
-            System.out.println("2. Delete Student");
-            System.out.println("3. Return to Main Menu");
-            System.out.print("Enter your choice: ");
-        }
-        if(students.size() != 0){
-
-            if(students.size() == 1){
-                student = students.get(0);
-                System.out.println("\nStudent Found: "+student.toString());
-                System.out.println("1. Edit Student");
-                System.out.println("2. Delete Student");
-                System.out.println("3. Return to Main Menu");
-                System.out.print("Enter your choice: ");
-            }
-            else {
-                int counter = 1;
-                System.out.println("\nStudents Found:");
-                for (Student s : students) {
-                    System.out.println(counter + " " + s.toString());
-                    counter++;
-                }
-                System.out.println("\nSelect student based on index: ");
-                int nestedChoice = getValidIntInput();
-                student = students.get(nestedChoice - 1);
-                System.out.println("Student Chosen: " + student.toString());
-                System.out.println("1. Edit Student");
-                System.out.println("2. Delete Student");
-                System.out.println("3. Return to Main Menu");
-                System.out.print("Enter your choice: ");
-            }
-        }
         int actionChoice = getValidIntInput();
         switch (actionChoice) {
             case 1:
@@ -132,10 +75,62 @@ public class StudentManagementUI {
         }
     }
 
+    private Student getStudentMenu(int choice){
+        ArrayList<Student> foundStudents = new ArrayList<>();
+
+        switch (choice) {
+            case 1:
+                // TODO: Implement search by ID ✔
+                System.out.print("Enter ID: ");
+                int id = getValidIntInput();
+                foundStudents.add(multiIndexStudentManager.getAvlTreeID().get(id));
+                break;
+            case 2:
+                // TODO: Implement search by Last Name✔
+                System.out.print("Enter Last Name: ");
+                String lastName = scanner.nextLine();
+                foundStudents = multiIndexStudentManager.getAvlTreeLastName().getbyName(lastName);
+                break;
+            case 3:
+                // TODO: Implement search by First Name✔
+                System.out.print("Enter First Name: ");
+                String firstName = scanner.nextLine();
+                foundStudents = multiIndexStudentManager.getAvlTreeFirstName().getbyName(firstName);
+                break;
+            default:
+                System.out.println("Invalid choice. Returning to main menu.");
+                searchStudentMenu();
+        }
+        Student student = null;
+        if(!foundStudents.isEmpty()){
+
+            if(foundStudents.size() == 1){
+                student = foundStudents.get(0);
+                System.out.println("\nStudent Found: " + student.toString());
+            }
+            else {
+                int counter = 1;
+                System.out.println("\nStudents Found:");
+                for (Student s : foundStudents) {
+                    System.out.println(counter + " " + s.toString());
+                    counter++;
+                }
+                student = getValidIndex(foundStudents);
+                System.out.println("Student Chosen: " + student.toString());
+            }
+            System.out.println("1. Edit Student");
+            System.out.println("2. Delete Student");
+            System.out.println("3. Return to Main Menu");
+            System.out.print("Enter your choice: ");
+        }else{
+            System.out.println("There is no student with this information!");
+        }
+        return student;
+    }
+
     private void addNewStudent() {
         System.out.println("\nAdding a New Student:");
-        System.out.print("Enter Student ID: ");
-        int id = getValidIntInput();
+        int id = generateUniqueId();
 
         System.out.print("Enter Last Name: ");
         String lastName = scanner.nextLine();
@@ -154,6 +149,8 @@ public class StudentManagementUI {
         multiIndexStudentManager.insert(newStudent);
         System.out.println("Student added successfully: " + newStudent);
     }
+
+
 
     private void showStudentsInLevel() {
         System.out.print("\nEnter Academic Level (FR, SO, JR, SR): ");
@@ -241,4 +238,29 @@ public class StudentManagementUI {
             }
         }
     }
+    private Student getValidIndex(ArrayList<Student> foundStudents){
+        while(true) {
+            try {
+                System.out.print("\nSelect student based on index: ");//getValidIndex
+                int nestedChoice = getValidIntInput();
+                return foundStudents.get(nestedChoice - 1);
+            }catch (IndexOutOfBoundsException e){
+                System.out.println("There is only "+ foundStudents.size() + " students with this feature");
+            }
+
+        }
+    }
+    private int generateUniqueId() {
+        int newId;
+        System.out.print("generating id");
+        do {
+            System.out.print(".");
+            newId = 10000 + (int) (Math.random() * 100000); // Generate random ID in range 10000-99999
+        } while (multiIndexStudentManager.getAvlTreeID().get(newId) != null);
+        System.out.println();
+        System.out.println("id generated successfully");
+        return newId;
+    }
+
+
 }
